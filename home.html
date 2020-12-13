@@ -23,14 +23,16 @@
       #instructions {
   position: absolute;
   margin: 20px;
-  margin-top: 100px;
+  margin-top: 160px;
   width: 25%;
   top: 0;
+
   bottom: 20%;
+  opacity: .6;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
   overflow-y: scroll;
-  font-family: sans-serif;
+  font-family: serif;
   font-size: 0.8em;
   line-height: 2em;
 }
@@ -44,16 +46,31 @@
     <div id='map'></div>
     <div id="instructions"></div>
     <script>
-       
+      var lat,long;
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  lat=position.coords.latitude;
+  long=position.coords.longitude;
+  console.log("Latitude: " + position.coords.latitude + "Longitude" + position.coords.longitude);
         mapboxgl.accessToken = 'pk.eyJ1IjoibWFudGhhbnJhdXQiLCJhIjoiY2tkYmM0Zmo1MWJrMTJ6czhxbXNvbHNsaSJ9.dWVxrAn2pisqGHQSiMPgVw';
         var map = new mapboxgl.Map({
           container: 'map', // container id
           style: 'mapbox://styles/mapbox/streets-v11', //stylesheet location
-          center: [73.017641, 19.038753], // starting position
-          zoom:  15 // starting zoom
+          center: [long,lat], // starting position
+          zoom:  15// starting zoom
+          
+
         });
+        map.addControl(new mapboxgl.NavigationControl());
         var marker = new mapboxgl.Marker() // Initialize a new marker
-    .setLngLat([73.017641, 19.038753]) // Marker [lng, lat] coordinates
+    .setLngLat([long,lat]) // Marker [lng, lat] coordinates
     .addTo(map)
 
     var geocoder = new MapboxGeocoder({ // Initialize the geocoder
@@ -63,8 +80,8 @@
     placeholder: 'Search for parking places ', // Placeholder text for the search bar
    // bbox: [-122.30937, 37.84214, -122.23715, 37.89838], // Boundary for Berkeley
     proximity: {
-      longitude: 73.017641,
-      latitude: 19.038753
+      longitude: long,
+      latitude: lat
     } // Coordinates of UC Berkeley
   });
 
@@ -81,7 +98,7 @@
   
         // an arbitrary start will always be the same
         // only the end or destination will change
-        var start = [73.017641, 19.038753];
+        var start = [long,lat];
   
         // create a function to make a directions request
         function getRoute(end) {
@@ -273,6 +290,8 @@ var rminutes = Math.round(minutes);
           });
         
         });
+      }
+
       </script>
   </body>
 </html>
