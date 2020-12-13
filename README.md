@@ -1,2 +1,4 @@
 # Search-and-Navigate-on-map
-[a link](https://searchlocation.herokuapp.com/)
+Click below link to view this project
+
+[Search Location and Navigate](https://searchlocation.herokuapp.com/)
