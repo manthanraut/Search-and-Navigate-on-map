@@ -23,15 +23,16 @@
       #instructions {
   position: absolute;
   margin: 20px;
-  margin-top: 160px;
-  width: 25%;
+  margin-top: 60px;
+  width: 40%;
   top: 0;
   bottom: 20%;
+  opacity: .6;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
   overflow-y: scroll;
   font-family: serif;
-  font-size: 1em;
+  font-size: 0.8em;
   line-height: 2em;
 }
 
@@ -66,7 +67,7 @@ function showPosition(position) {
           
 
         });
-        map.addControl(new mapboxgl.NavigationControl());
+     //   map.addControl(new mapboxgl.NavigationControl());
         var marker = new mapboxgl.Marker() // Initialize a new marker
     .setLngLat([long,lat]) // Marker [lng, lat] coordinates
     .addTo(map)
